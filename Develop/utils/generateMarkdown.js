@@ -3,11 +3,11 @@
 
 class markdown{
   constructor(data){
-    this.data = JSON.stringify(data);
+    this.data = data;
   }
 
   print(){
-    return(this.data)
+    return(JSON.stringify(this.data))
   }
   renderLicenseBadge(license) {
 
@@ -27,8 +27,8 @@ renderLicenseSection(license) {
 }
 
 // TODO: Create a function to generate markdown for README
-generateMarkdown(data) {
-  return `# ${data.title}
+generateMarkdown() {
+  return `# ${this.data.title}
 
 `;
 }
