@@ -1,0 +1,27 @@
+{
+  "name": "readme-generator",
+  "version": "1.0.0",
+  "description": "A tool that asks a user for prompts. And then creates a readme file in markdown. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhowe21/Readme-generator.git"
+  },
+  "keywords": [
+    "Readme",
+    "Generate",
+    "markdown"
+  ],
+  "author": "Mason Howe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhowe21/Readme-generator/issues"
+  },
+  "homepage": "https://github.com/mhowe21/Readme-generator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
