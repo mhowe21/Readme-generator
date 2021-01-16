@@ -22,7 +22,7 @@ const questions = [
   {
     type: "input",
     name: "Install",
-    message: "Enter any instilation instructions",
+    message: "Enter any Installation instructions",
   },
   {
     type: "input",
@@ -56,11 +56,12 @@ const questions = [
 
 inquirer.prompt(questions).then((answers) => {
     
-    let m = new markdown(answers)
-    m.renderLicenseLink()
-    let mark = m.generateMarkdown()
-    console.log(m.print())
-    writeToFile("testReadme", mark)
+    let m = new markdown(answers);
+    m.renderLicenseLink();
+    m.renderLicenseBadge();
+    let mark = m.generateMarkdown();
+    console.log(m.print());
+    writeToFile("testReadme", mark);
 
 })
 
