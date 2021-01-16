@@ -86,7 +86,8 @@ const questions = [
 ];
 
 inquirer.prompt(selections).then((anwsers) => {
-  console.log(anwsers);
+  console.log(anwsers.selections);
+  
 });
 
 // inquirer.prompt(questions).then((answers) => {
