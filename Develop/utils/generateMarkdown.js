@@ -7,6 +7,10 @@ class markdown {
     this.licenseInfo = ``;
     this.licenseBadge = ``;
     this.license = data.License;
+    this.usage;
+    this.Install;
+    this.Credits;
+    this.Disc
   }
 
   print() {
@@ -43,31 +47,55 @@ class markdown {
     } else if (this.license == "Other") {
       licenseLink = "Other";
     } else {
-      licenseLink = "";
+      licenseLink = false;
     }
-    this.licenseInfo = `license ${licenseLink}`;
+    if(licenseLink == false){
+      this.licenseInfo = ``
+      return(this.licenseInfo)
+    }else{
+      this.licenseInfo = `##License <br>
+      ${licenseLink} infomation`;
+      return(this.licenseInfo)
+    }
+    
+  }
+  renderUsage(){
+    if(this.data.Usage){
+      this.usage = `## Usage
+      ${this.data.Usage}`;
+    }else{
+      this.usage = ``
+    }
+  }
+  renderInstall(){
+    if(this.data.Install){
+      this.Install = `## Install<br>
+      ${this.data.Install}`
+    }else{
+      this.Install = ``
+    }
+  }
+  renderCredits(){
+    if(this.data.Credits){
+      this.Credits = `## Credits<br>
+      ${this.data.Credits}`
+    }else{
+      this.Credits = ``
+    }
   }
 
-  // TODO: Create a function that returns the license section of README
-  // If there is no license, return an empty string
-  renderLicenseSection() {}
 
   // TODO: Create a function to generate markdown for README
   generateMarkdown() {
-    const { title, Disc, Install, Usage, Credits } = this.data;
+    
     return `
-  # ${title}<br>
-  ## Discription    ${this.licenseBadge}<br>
-  ${Disc}<br>
+  # ${this.data.title} ${this.licenseBadge}<br>
+  ## Discription<br>
+  ${this.data.Disc}<br>
+  ${this.Install}
+  ${this.usage}
+  ${this.Credits}
   
-  ## Install Instructions <br>
-  ${Install}
-  ## Usage
-  ${Usage}<br>
-  ## License<br>
-  ${this.licenseInfo}<br>
-
-
 
 `;
   }

@@ -59,6 +59,9 @@ inquirer.prompt(questions).then((answers) => {
     let m = new markdown(answers);
     m.renderLicenseLink();
     m.renderLicenseBadge();
+    m.renderInstall()
+    m.renderUsage()
+    m.renderCredits();
     let mark = m.generateMarkdown();
     console.log(m.print());
     writeToFile("testReadme", mark);
