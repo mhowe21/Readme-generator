@@ -64,6 +64,13 @@ const questions = [
     type: "input",
     name: "github",
     message: "Enter a link to your github"
+  },
+  {
+    type: "list",
+    name: "TOC",
+    message: "Would you like a table of contents?",
+    options: ["Yes","No"]
+
   }
 ];
 
