@@ -69,7 +69,7 @@ const questions = [
     type: "list",
     name: "TOC",
     message: "Would you like a table of contents?",
-    options: ["Yes","No"]
+    choices: ["Yes","No"]
 
   }
 ];
