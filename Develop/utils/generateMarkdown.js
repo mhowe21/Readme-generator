@@ -1,6 +1,3 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-
 class markdown {
   constructor(data) {
     this.data = data;
@@ -10,8 +7,9 @@ class markdown {
     this.Usage = ``;
     this.Install = ``;
     this.Credits = ``;
-    this.Disc = ``;
+    this.Description = ``;
     this.Title = ``;
+    this.Questions = ``;
   }
 
   print() {
@@ -19,12 +17,12 @@ class markdown {
   }
 
   renderBody() {
-    const { Title, Disc, Install, Usage, Credits } = this.data;
+    const { Title, Description, Install, Usage, Credits, Email, Github } = this.data;
     if (Title) {
       this.Title = `# ${Title}`;
     }
-    if (Disc) {
-      this.Disc = `## Discription\r\n${Disc}`;
+    if (Description) {
+      this.Description = `## Description\r\n${Description}`;
     }
     if (Install) {
       this.Install = `## Install Instructions\r\n${Install}`;
@@ -34,6 +32,9 @@ class markdown {
     }
     if (Credits) {
       this.Credits = `## Credits\r\n${Credits}`;
+    }
+    if (Email || Credits) {
+      this.Questions = `## Questions\r\nIf you have questions about this project you can reach me at <${Email}>.\r\nYou can also view other projects at <${Github}>.`;
     }
   }
   renderLicenseBadge() {
@@ -52,8 +53,6 @@ class markdown {
     }
   }
 
-  // TODO: Create a function that returns the license link
-  // If there is no license, return an empty string
   renderLicenseLink() {
     let licenseLink = ``;
     if (this.license == "BSD") {
@@ -77,17 +76,21 @@ class markdown {
       return this.licenseInfo;
     }
   }
-  
+  renderTOC(){
+    if(this.data.TOC){
+      
+    }
+  }
 
-  // TODO: Create a function to generate markdown for README
   generateMarkdown() {
     return `
   ${this.Title} ${this.licenseBadge}<br>
-  ${this.Disc}
+  ${this.Description}
   ${this.Install}
   ${this.Usage}
   ${this.licenseInfo}
   ${this.Credits}
+  ${this.Questions}
   
   
 

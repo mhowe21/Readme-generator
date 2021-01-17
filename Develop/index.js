@@ -21,13 +21,13 @@ const questions = [
   },
   {
     type: "input",
-    name: "Disc",
+    name: "Description",
     message: "enter a description for your readme",
     validate: function (value) {
       if (value) {
         return true;
       } else {
-        return "please enter a discription.";
+        return "please enter a description.";
       }
     },
   },
@@ -62,7 +62,7 @@ const questions = [
   },
   {
     type: "input",
-    name: "github",
+    name: "Github",
     message: "Enter a link to your github"
   },
   {
