@@ -6,17 +6,30 @@ const markdown = require("./utils/generateMarkdown.js");
 
 // selections
 
-
 const questions = [
   {
     type: "input",
-    name: "title",
+    name: "Title",
     message: "What is the title of the readme",
+    validate: function (value) {
+      if (value) {
+        return true;
+      } else {
+        return "please enter a title";
+      }
+    },
   },
   {
     type: "input",
     name: "Disc",
     message: "enter a description for your readme",
+    validate: function (value) {
+      if (value) {
+        return true;
+      } else {
+        return "please enter a discription.";
+      }
+    },
   },
 
   {
@@ -35,38 +48,35 @@ const questions = [
     message: "Enter Any credits",
   },
   {
-      type: "list",
-      name: "License",
-      message: "What License type",
-      default: "None",
+    type: "list",
+    name: "License",
+    message: "What License type",
+    default: "None",
 
-      choices: 
-      [
-          "MIT",
-          "GNU",
-          "Apache",
-          "BSD",
-          "Other",
-          "None"
-      ]
+    choices: ["MIT", "GNU", "Apache", "BSD", "Other", "None"],
+  },
+  {
+    type: "input",
+    name: "Email",
+    message: "what is your email?",
+  },
+  {
+    type: "input",
+    name: "github",
+    message: "Enter a link to your github"
   }
 ];
 
-
-
 inquirer.prompt(questions).then((answers) => {
-    
-    let m = new markdown(answers);
-    m.renderLicenseLink();
-    m.renderLicenseBadge();
-    m.renderInstall()
-    m.renderUsage()
-    m.renderCredits();
-    let mark = m.generateMarkdown();
-    console.log(m.print());
-    writeToFile("testReadme", mark);
-
-})
+  let m = new markdown(answers);
+  m.renderBody();
+  m.renderLicenseLink();
+  m.renderLicenseBadge();
+  
+  let mark = m.generateMarkdown();
+  console.log(m.print());
+  writeToFile("testReadme", mark);
+});
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {

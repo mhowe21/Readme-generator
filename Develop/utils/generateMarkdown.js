@@ -7,14 +7,34 @@ class markdown {
     this.licenseInfo = ``;
     this.licenseBadge = ``;
     this.license = data.License;
-    this.usage;
-    this.Install;
-    this.Credits;
-    this.Disc
+    this.Usage = ``;
+    this.Install = ``;
+    this.Credits = ``;
+    this.Disc = ``;
+    this.Title = ``;
   }
 
   print() {
     return JSON.stringify(this.data);
+  }
+
+  renderBody() {
+    const { Title, Disc, Install, Usage, Credits } = this.data;
+    if (Title) {
+      this.Title = `# ${Title}`;
+    }
+    if (Disc) {
+      this.Disc = `## Discription\r\n${Disc}`;
+    }
+    if (Install) {
+      this.Install = `## Install Instructions\r\n${Install}`;
+    }
+    if (Usage) {
+      this.Usage = `## Usage Instructions\r\n${Usage}`;
+    }
+    if (Credits) {
+      this.Credits = `## Credits\r\n${Credits}`;
+    }
   }
   renderLicenseBadge() {
     if (this.license == "BSD") {
@@ -27,7 +47,7 @@ class markdown {
       this.licenseBadge = `![MIT](https://img.shields.io/badge/license-MIT-green)`;
     } else if (this.license == "Other") {
       this.licenseBadge = "Other";
-    }else{
+    } else {
       this.licenseBadge = "";
     }
   }
@@ -36,7 +56,7 @@ class markdown {
   // If there is no license, return an empty string
   renderLicenseLink() {
     let licenseLink = ``;
-    if (this.licenseInfo == "BSD") {
+    if (this.license == "BSD") {
       licenseLink = `[BSD License](https://opensource.org/licenses/BSD-3-Clause)`;
     } else if (this.license == "Apache") {
       licenseLink = `[Apache License](https://www.apache.org/licenses/LICENSE-2.0)`;
@@ -49,52 +69,26 @@ class markdown {
     } else {
       licenseLink = false;
     }
-    if(licenseLink == false){
-      this.licenseInfo = ``
-      return(this.licenseInfo)
-    }else{
-      this.licenseInfo = `##License <br>
-      ${licenseLink} infomation`;
-      return(this.licenseInfo)
-    }
-    
-  }
-  renderUsage(){
-    if(this.data.Usage){
-      this.usage = `## Usage
-      ${this.data.Usage}`;
-    }else{
-      this.usage = ``
+    if (licenseLink == false) {
+      this.licenseInfo = ``;
+      return this.licenseInfo;
+    } else {
+      this.licenseInfo = `## License\r\n${licenseLink} infomation`;
+      return this.licenseInfo;
     }
   }
-  renderInstall(){
-    if(this.data.Install){
-      this.Install = `## Install<br>
-      ${this.data.Install}`
-    }else{
-      this.Install = ``
-    }
-  }
-  renderCredits(){
-    if(this.data.Credits){
-      this.Credits = `## Credits<br>
-      ${this.data.Credits}`
-    }else{
-      this.Credits = ``
-    }
-  }
-
+  
 
   // TODO: Create a function to generate markdown for README
   generateMarkdown() {
-    
     return `
-  # ${this.data.title} ${this.licenseBadge}<br>
-  ## Discription<br>
-  ${this.data.Disc}<br>
+  ${this.Title} ${this.licenseBadge}<br>
+  ${this.Disc}
   ${this.Install}
-  ${this.usage}
+  ${this.Usage}
+  ${this.licenseInfo}
   ${this.Credits}
+  
   
 
 `;
