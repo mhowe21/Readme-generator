@@ -10,7 +10,7 @@ const questions = [
   {
     type: "input",
     name: "Title",
-    message: "What is the title of the readme",
+    message: "What is the title of the readme (required)",
     validate: function (value) {
       if (value) {
         return true;
@@ -22,7 +22,7 @@ const questions = [
   {
     type: "input",
     name: "Description",
-    message: "enter a description for your readme",
+    message: "enter a description for your readme (required)",
     validate: function (value) {
       if (value) {
         return true;
@@ -79,6 +79,7 @@ inquirer.prompt(questions).then((answers) => {
   m.renderBody();
   m.renderLicenseLink();
   m.renderLicenseBadge();
+  m.renderTOC()
   
   let mark = m.generateMarkdown();
   console.log(m.print());
@@ -93,8 +94,4 @@ function writeToFile(fileName, data) {
   });
 }
 
-// TODO: Create a function to initialize app
-function init() {}
 
-// Function call to initialize app
-init();

@@ -10,6 +10,7 @@ class markdown {
     this.Description = ``;
     this.Title = ``;
     this.Questions = ``;
+    this.TOCdata = ``;
   }
 
   print() {
@@ -25,10 +26,10 @@ class markdown {
       this.Description = `## Description\r\n${Description}`;
     }
     if (Install) {
-      this.Install = `## Install Instructions\r\n${Install}`;
+      this.Install = `## Install\r\n${Install}`;
     }
     if (Usage) {
-      this.Usage = `## Usage Instructions\r\n${Usage}`;
+      this.Usage = `## Usage\r\n${Usage}`;
     }
     if (Credits) {
       this.Credits = `## Credits\r\n${Credits}`;
@@ -77,15 +78,27 @@ class markdown {
     }
   }
   renderTOC(){
-    if(this.data.TOC){
-      
+
+    let tocHeaders = [];
+    if(this.data.TOC == "Yes"){
+      this.TOCdata = `## Table of Contents\r\n`
+      for(const [key,value] of Object.entries(this.data)){
+        if(value && key!="TOC"){
+          
+          this.TOCdata = this.TOCdata + (`* [${key}](#${key})\r\n`)
+          
+        }
+
+      }
     }
+    return (this.TOCdata)
   }
 
   generateMarkdown() {
     return `
-  ${this.Title} ${this.licenseBadge}<br>
+  ${this.Title} ${this.licenseBadge}\r\n
   ${this.Description}
+  ${this.TOCdata}
   ${this.Install}
   ${this.Usage}
   ${this.licenseInfo}
