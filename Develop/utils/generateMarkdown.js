@@ -108,7 +108,7 @@ class markdown {
         if (value && key != "TOC" && key != "Github" && key !="Email" ) {
           this.TOCdata = this.TOCdata + `* [${key}](#${key})\r\n`;
         }else if((key == "Github" || key == "Email") && toggle == false){
-          this.TOCdata = this.TOCdata + (`* [Questions][#Questions]\r\n`);
+          this.TOCdata = this.TOCdata + (`* [Questions](#Questions)\r\n`);
           toggle = true;
 
         }
