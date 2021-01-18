@@ -1,14 +1,13 @@
 // TODO: Include packages needed for this application
 const fs = require("fs");
 const inquirer = require("inquirer");
-const {
-  normalize
-} = require("path");
+const { normalize } = require("path");
 const markdown = require("./utils/generateMarkdown.js");
 
 // selections
 
-const questions = [{
+const questions = [
+  {
     type: "input",
     name: "Title",
     message: "What is the title of the readme (required)",
@@ -64,15 +63,14 @@ const questions = [{
   {
     type: "input",
     name: "Github",
-    message: "Enter a link to your github"
+    message: "Enter a link to your github",
   },
   {
     type: "list",
     name: "TOC",
     message: "Would you like a table of contents?",
-    choices: ["Yes", "No"]
-
-  }
+    choices: ["Yes", "No"],
+  },
 ];
 
 inquirer.prompt(questions).then((answers) => {
@@ -82,9 +80,7 @@ inquirer.prompt(questions).then((answers) => {
   m.renderLicenseBadge();
   m.renderQuestion();
   m.renderTOC();
-
   let mark = m.generateMarkdown();
-  console.log(m.print());
   writeToFile(String(`README.md`), mark);
 });
 
