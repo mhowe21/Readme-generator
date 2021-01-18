@@ -18,24 +18,29 @@ class markdown {
   }
 
   renderBody() {
-    const { Title, Description, Install, Usage, Credits, Email, Github } = this.data;
+    const {
+      Title,
+      Description,
+      Install,
+      Usage,
+      Credits,
+      Email,
+      Github,
+    } = this.data;
     if (Title) {
       this.Title = `# ${Title}`;
     }
     if (Description) {
-      this.Description = `## Description\r\n${Description}`;
+      this.Description = `## Description\r\n${Description}\r\n`;
     }
     if (Install) {
-      this.Install = `## Install\r\n${Install}`;
+      this.Install = `## Install\r\n${Install}\r\n`;
     }
     if (Usage) {
-      this.Usage = `## Usage\r\n${Usage}`;
+      this.Usage = `## Usage\r\n${Usage}\r\n`;
     }
     if (Credits) {
-      this.Credits = `## Credits\r\n${Credits}`;
-    }
-    if (Email || Credits) {
-      this.Questions = `## Questions\r\nIf you have questions about this project you can reach me at <${Email}>.\r\nYou can also view other projects at <${Github}>.`;
+      this.Credits = `## Credits\r\n${Credits}\r\n`;
     }
   }
   renderLicenseBadge() {
@@ -51,6 +56,24 @@ class markdown {
       this.licenseBadge = "Other";
     } else {
       this.licenseBadge = "";
+    }
+  }
+
+  renderQuestion() {
+    const { Email, Github } = this.data;
+
+    if (Email || Github) {
+      this.Questions = `## Questions\r\n`;
+
+      if (Email) {
+        this.Questions =
+          this.Questions +
+          `If you have questions about this project you can reach me at <${Email}>.\r\n`;
+      }
+      if (Github) {
+        this.Questions =
+          this.Questions + `You can also view other projects at <${Github}>`;
+      }
     }
   }
 
@@ -77,21 +100,21 @@ class markdown {
       return this.licenseInfo;
     }
   }
-  renderTOC(){
+  renderTOC() {
+    let toggle = false
+    if (this.data.TOC == "Yes") {
+      this.TOCdata = `## Table of Contents\r\n`;
+      for (const [key, value] of Object.entries(this.data)) {
+        if (value && key != "TOC" && key != "Github" && key !="Email" ) {
+          this.TOCdata = this.TOCdata + `* [${key}](#${key})\r\n`;
+        }else if((key == "Github" || key == "Email") && toggle == false){
+          this.TOCdata = this.TOCdata + (`* [Questions][#Questions]\r\n`);
+          toggle = true;
 
-    let tocHeaders = [];
-    if(this.data.TOC == "Yes"){
-      this.TOCdata = `## Table of Contents\r\n`
-      for(const [key,value] of Object.entries(this.data)){
-        if(value && key!="TOC"){
-          
-          this.TOCdata = this.TOCdata + (`* [${key}](#${key})\r\n`)
-          
         }
-
       }
     }
-    return (this.TOCdata)
+    return this.TOCdata;
   }
 
   generateMarkdown() {

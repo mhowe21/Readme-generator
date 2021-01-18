@@ -1,13 +1,14 @@
 // TODO: Include packages needed for this application
 const fs = require("fs");
 const inquirer = require("inquirer");
-const { normalize } = require("path");
+const {
+  normalize
+} = require("path");
 const markdown = require("./utils/generateMarkdown.js");
 
 // selections
 
-const questions = [
-  {
+const questions = [{
     type: "input",
     name: "Title",
     message: "What is the title of the readme (required)",
@@ -69,7 +70,7 @@ const questions = [
     type: "list",
     name: "TOC",
     message: "Would you like a table of contents?",
-    choices: ["Yes","No"]
+    choices: ["Yes", "No"]
 
   }
 ];
@@ -79,11 +80,12 @@ inquirer.prompt(questions).then((answers) => {
   m.renderBody();
   m.renderLicenseLink();
   m.renderLicenseBadge();
-  m.renderTOC()
-  
+  m.renderQuestion();
+  m.renderTOC();
+
   let mark = m.generateMarkdown();
   console.log(m.print());
-  writeToFile("testReadme", mark);
+  writeToFile(String(`README.md`), mark);
 });
 
 // TODO: Create a function to write README file
@@ -93,5 +95,3 @@ function writeToFile(fileName, data) {
     console.log("file written");
   });
 }
-
-
