@@ -121,7 +121,7 @@ class markdown {
     return `
   ${this.Title} ${this.licenseBadge}\r\n
   ${this.Description}
-  ${this.TOCdata}
+  ${this.TOCdata}\r\n
   ${this.Install}
   ${this.Usage}
   ${this.licenseInfo}
