@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require("fs");
 const inquirer = require("inquirer");
-const { normalize } = require("path");
+const path = require("path");
 const markdown = require("./utils/generateMarkdown.js");
 
 // selections
@@ -81,12 +81,12 @@ inquirer.prompt(questions).then((answers) => {
   m.renderQuestion();
   m.renderTOC();
   let mark = m.generateMarkdown();
-  writeToFile(String(`README.md`), mark);
+  writeFile("Readme.md", mark);
 });
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  fs.writeFile(`${JSON.stringify(fileName)}.md`, data, (err) => {
+function writeFile(fileName, data) {
+  fs.writeFile(`${fileName}`, data, (err) => {
     if (err) throw err;
     console.log("file written");
   });
